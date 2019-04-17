@@ -1,3 +1,5 @@
+
+//This is the clever way and shortest way to solve this problem.
 public class BraceChecker {
 
   public boolean isValid(String braces) { 
@@ -13,4 +15,32 @@ public class BraceChecker {
     }
     return false;
   }
+}
+
+
+// The way I did it
+
+import java.util.*;
+
+public class BraceChecker {
+
+  public boolean isValid(String braces) {
+    if (braces.equals("")) return false;
+    
+    Deque<Character> stack = new ArrayDeque<>();
+  
+    for (char c : braces.toCharArray()) {
+      switch(c) {
+        case '(': stack.push(')'); break;
+        case '[': stack.push(']'); break;
+        case '{': stack.push('}'); break;
+        case ']':
+        case ')':
+        case '}': 
+          if (stack.peek() == null || !stack.peek().equals(c)) return false; else stack.pop();
+      }        
+    }
+    return stack.isEmpty() ? true : false;
+  }
+
 }
